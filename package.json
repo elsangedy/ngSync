@@ -1,17 +1,14 @@
 {
-  "name": "angular-sync",
+  "name": "ngSync",
   "version": "1.0.0",
-  "description": "",
+  "description": "Save Angular JS $http requests when you are offline, and execute when you are online.",
   "main": "Gulpfile.js",
   "directories": {
     "example": "example"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/munir7/angular-sync.git"
+    "url": "https://github.com/munir7/ngSync.git"
   },
   "author": {
     "name": "Munir Ahmed",
@@ -19,9 +16,9 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/munir7/angular-sync/issues"
+    "url": "https://github.com/munir7/ngSync/issues"
   },
-  "homepage": "https://github.com/munir7/angular-sync",
+  "homepage": "https://github.com/munir7/ngSync",
   "devDependencies": {
     "browser-sync": "^2.2.3",
     "gulp": "^3.8.11",
