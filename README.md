@@ -1,6 +1,8 @@
 # ngSync
+Save ($http)[https://docs.angularjs.org/api/ng/service/$http] requests when you are offline, and execute when you are online
 
-Example:
+
+Example usage:
 
 ```javascript
 var module = angular.module('myModdule', ['ngSync']);
@@ -38,7 +40,7 @@ $ gulp
 * Must have [Gulp](https://github.com/gulpjs/gulp) node package installed globally
 
 
-## Contributing
+### Contributing
 
 1. Fork it!
 2. Create your feature branch: `git checkout -b my-new-feature`
@@ -47,6 +49,6 @@ $ gulp
 5. Submit a pull request :D
 
 
-## License
+### License
 
 - [MIT](LICENSE)
