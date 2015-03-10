@@ -1,5 +1,5 @@
 # ngSync
-Save [$http](https://docs.angularjs.org/api/ng/service/$http) requests when you are offline, and execute when you are online
+Save AngularJS [$http](https://docs.angularjs.org/api/ng/service/$http) requests when you are offline, and execute when you are online
 
 
 Example usage:
