@@ -1,5 +1,6 @@
 # ngSync
 
+Example:
 ```javascript
 var module = angular.module('myModdule', ['ngSync']);
 
