@@ -59,6 +59,16 @@
         $rootScope.queues = $sync.getQueues();
       });
 
+      $rootScope.setOffline = function()
+      {
+        $rootScope.$broadcast('sync:offline');
+      }
+
+      $rootScope.setOnline = function()
+      {
+        $rootScope.$broadcast('sync:online');
+      }
+
       $rootScope.get = function()
       {
         $http.get('http://api.mydomain.com/v1/file');
@@ -67,7 +77,10 @@
       $rootScope.post = function()
       {
         var data = {
-          name: 'test'
+          name: 'test',
+          tesTE: 'asdasdads',
+          tesTE1: '1',
+          tesTE2: '2'
         };
 
         $http.post('http://api.mydomain.com/v1/file', data);
@@ -85,16 +98,6 @@
       $rootScope.delete = function()
       {
         $http.delete('http://api.mydomain.com/v1/file/1');
-      }
-
-      $rootScope.setOffline = function()
-      {
-        $rootScope.$broadcast('sync:offline');
-      }
-
-      $rootScope.setOnline = function()
-      {
-        $rootScope.$broadcast('sync:online');
       }
     }]);
     </script>

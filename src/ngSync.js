@@ -42,9 +42,9 @@
 
     //---
 
-    syncProviderGet.$inject = ['$rootScope', 'SyncOnline'];
+    syncProviderGet.$inject = ['$rootScope', '$q', 'SyncOnline'];
 
-    function syncProviderGet($rootScope, SyncOnline) {
+    function syncProviderGet($rootScope, $q, SyncOnline) {
 
         var options = angular.extend({}, defaultOptions, globalOptions);
 
@@ -70,6 +70,13 @@
 
         function addQueue(config)
         {
+          config = {
+            url: config.url,
+            method: config.method.toUpperCase(),
+            data: config.data,
+            headers: config.headers
+          };
+
           if(config.method != 'DELETE' && config.method != 'POST' && config.method != 'PUT') {
             return;
           }
@@ -136,18 +143,26 @@
 
           var xhr = new XMLHttpRequest();
 
+          xhr.open(value.method, value.url);
+
+          var arr = [];
+
+          angular.forEach(value.headers, function(v, k)
+          {
+            xhr.setRequestHeader(k, v);
+            arr.push(k);
+          });
+
+          $q.all(arr).then(function(values) {
+            xhr.send(JSON.stringify(value.data));
+          }, function(reason) {
+            deferred.reject(reason);
+          });
+
           xhr.onload = function(e)
           {
             delQueue(key);
           };
-
-          xhr.open(value.method, value.url);
-
-          if(value.data) {
-            xhr.send(value.data);
-          } else {
-            xhr.send();
-          }
         }
 
         //---
@@ -192,11 +207,7 @@
     function request(config) {
       // TODO: alterar para !SyncOnline.isOnline(), para cair somente quando estiver sem internet
       if(SyncOnline.isOnline() && $sync.isUrlRoot(config)) {
-        $sync.addQueue({
-          url: config.url,
-          method: config.method.toUpperCase(),
-          data: config.data
-        });
+        $sync.addQueue(config);
       }
 
       return config;

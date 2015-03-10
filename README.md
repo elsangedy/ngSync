@@ -1,9 +1,15 @@
-# angular-sync
+# ngSync
 
+```javascript
+var module = angular.module('myModdule', ['ngSync']);
 
-var module = angular.module('myModdule', [angular-sync]);
-
-module..config(['$httpProvider', function($httpProvider)
+module.config(['$httpProvider', '$syncProvider', function($httpProvider, $syncProvider)
 {
-  $httpProvider.interceptors.push('AngularSyncInterceptor');
+  $httpProvider.interceptors.push('SyncInterceptor');
+
+  $syncProvider.options({
+    urlRoot: 'http://api.mydomain.com/v1/' // empty for all urls
+    // other configs
+  });
 }]);
+```
