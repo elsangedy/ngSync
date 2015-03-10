@@ -1,0 +1,102 @@
+<!doctype html5>
+<html>
+  <head>
+    <title>Angular Sync</title>
+  </head>
+  <body ng-app="myModule">
+    <button type="button" ng-click="get()">GET</button>
+    <button type="button" ng-click="post()">POST</button>
+    <button type="button" ng-click="put()">PUT</button>
+    <button type="button" ng-click="delete()">DELETE</button>
+    <button type="button" ng-click="setOnline()">ONLINE</button>
+    <button type="button" ng-click="setOffline()">OFFLINE</button>
+
+    <br>
+    <h1>Lista de tarefas</h1>
+    <br>
+    <ul>
+      <li ng-repeat="queue in queues">{{ queue }}</li>
+    </ul>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <script src="ngSync.min.js"></script>
+    <script>
+    // angular module definition
+    angular.module(
+      // module name
+      'myModule',
+  
+      // module dependencies
+      [
+        'ngSync'
+      ]
+    )
+
+    // module config
+    .config(['$httpProvider', '$syncProvider', function($httpProvider, $syncProvider)
+    {
+      $httpProvider.interceptors.push('SyncInterceptor');
+ 
+      $syncProvider.options({
+        urlRoot: 'http://api.mydomain.com/v1/'
+      });
+    }])
+
+    // module run
+    .run(['$rootScope', '$http', '$sync', function($rootScope, $http, $sync)
+    {
+      $sync.init();
+
+      $rootScope.queues = $sync.getQueues();
+
+      $rootScope.$on('sync:addQueue', function()
+      {
+        $rootScope.queues = $sync.getQueues();
+      });
+
+      $rootScope.$on('sync:delQueue', function()
+      {
+        $rootScope.queues = $sync.getQueues();
+      });
+
+      $rootScope.get = function()
+      {
+        $http.get('http://api.mydomain.com/v1/file');
+      }
+
+      $rootScope.post = function()
+      {
+        var data = {
+          name: 'test'
+        };
+
+        $http.post('http://api.mydomain.com/v1/file', data);
+      }
+
+      $rootScope.put = function()
+      {
+        var data = {
+          name: 'test1'
+        };
+
+        $http.put('http://api.mydomain.com/v1/file/1', data);
+      }
+
+      $rootScope.delete = function()
+      {
+        $http.delete('http://api.mydomain.com/v1/file/1');
+      }
+
+      $rootScope.setOffline = function()
+      {
+        $rootScope.$broadcast('sync:offline');
+      }
+
+      $rootScope.setOnline = function()
+      {
+        $rootScope.$broadcast('sync:online');
+      }
+    }]);
+    </script>
+  </body>
+</html>
