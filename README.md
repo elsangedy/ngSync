@@ -1,6 +1,7 @@
 # ngSync
 
 Example:
+
 ```javascript
 var module = angular.module('myModdule', ['ngSync']);
 
@@ -14,6 +15,27 @@ module.config(['$httpProvider', '$syncProvider', function($httpProvider, $syncPr
   });
 }]);
 ```
+
+
+## Installation Guide
+
+Enter the following commands in the terminal
+
+```bash
+$ git clone https://github.com/munir7/ngSync.git
+$ cd ngSync
+$ npm install
+$ gulp
+```
+
+
+### Prerequisites
+
+* Must have [Git](http://git-scm.com/) installed
+
+* Must have [node.js (at least v0.10.0)](http://nodejs.org/) installed with npm (Node Package Manager)
+
+* Must have [Gulp](https://github.com/gulpjs/gulp) node package installed globally
 
 
 ## Contributing
