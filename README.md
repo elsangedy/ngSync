@@ -5,7 +5,7 @@ Save Angular JS [$http](https://docs.angularjs.org/api/ng/service/$http) request
 Example usage:
 
 ```javascript
-var module = angular.module('myModdule', ['ngSync']);
+var module = angular.module('myModule', ['ngSync']);
 
 module.config(['$httpProvider', '$syncProvider', function($httpProvider, $syncProvider)
 {
