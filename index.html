@@ -20,13 +20,21 @@
 
     <section class="main-content">
       <h3>
-<a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+<a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Welcome to ngSync.</h3>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<p>Example usage:</p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
+<pre><code>var module = angular.module('myModule', ['ngSync']);
+
+module.config(['$httpProvider', '$syncProvider', function($httpProvider, $syncProvider)
+{
+  $httpProvider.interceptors.push('SyncInterceptor');
+
+  $syncProvider.options({
+    urlRoot: 'http://api.mydomain.com/v1/' // empty for all urls
+    // other configs
+  });
+}]);
 </code></pre>
 
 <p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
